@@ -11,7 +11,7 @@
 
     {{-- NAVBAR --}}
     <nav class="bg-slate-900 border-b border-slate-700 px-8 py-4 flex items-center justify-between fixed top-0 left-0 right-0 z-10">
-        <span class="text-violet-400 font-bold text-xl tracking-widest uppercase">🎬 CineVault</span>
+        <span class="text-violet-400 font-bold text-xl tracking-widest uppercase">🎬 MyCine</span>
         <div class="flex items-center gap-6 text-sm text-slate-300">
             <a href="#" class="hover:text-violet-400 transition">Início</a>
             <a href="#" class="hover:text-violet-400 transition">Buscar</a>

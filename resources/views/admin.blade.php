@@ -11,9 +11,9 @@
 
     {{-- NAVBAR --}}
     <nav class="bg-slate-900 border-b border-slate-700 px-8 py-4 flex items-center justify-between fixed top-0 left-0 right-0 z-10">
-        <span class="text-violet-400 font-bold text-xl tracking-widest uppercase">🎬 CineVault</span>
+        <span class="text-violet-400 font-bold text-xl tracking-widest uppercase">🎬 MyCine</span>
         <div class="flex items-center gap-6 text-sm text-slate-300">
-            <a href="#" class="hover:text-violet-400 transition">Início</a>
+            <a href="filmes" class="hover:text-violet-400 transition">Início</a>
             <a href="#" class="hover:text-violet-400 transition">Buscar</a>
             <a href="#" class="hover:text-violet-400 transition">Favoritos</a>
             <a href="admin" class="hover:text-violet-400 transition">Administrador</a>
@@ -42,6 +42,20 @@
 
         {{-- LISTA DE FILMES --}}
         <main class="ml-52 flex-1 p-8 flex flex-col gap-4">
+
+
+            @if(session('success')) // cria uma mensagem de sucesso e faz ela sumir depois de 2 segundos
+                <div 
+                    x-data="{ show: true }"
+                    x-show="show"
+                    x-init="setTimeout(() => show = false, 2000)"
+                    class="bg-green-600 text-white px-4 py-2 rounded mb-4">
+
+                    {{ session('success') }}
+
+                </div>
+            @endif
+
 
             <h1 class="text-lg font-semibold text-slate-300 mb-2">
                 Exibindo: <span class="text-violet-400" x-text="generoAtivo"></span>

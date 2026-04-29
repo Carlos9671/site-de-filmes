@@ -16,7 +16,7 @@ class FilmeController extends Controller
     {
         $filmes = Filme::with('generos')->get();     //puxa tudo
         $generos = Genero::pluck('genero'); //puxa a coluna genero
-        return view("admin", compact("filmes", "generos"));    //retorna os valores pedidos
+        return view("filmes", compact("filmes", "generos"));    //retorna os valores pedidos
     }
 
     /**
