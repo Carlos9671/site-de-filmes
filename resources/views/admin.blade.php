@@ -16,7 +16,7 @@
             <a href="#" class="hover:text-violet-400 transition">Início</a>
             <a href="#" class="hover:text-violet-400 transition">Buscar</a>
             <a href="#" class="hover:text-violet-400 transition">Favoritos</a>
-            <a href="/admin" class="hover:text-violet-400 transition">Adiministrador</a>
+            <a href="admin" class="hover:text-violet-400 transition">Administrador</a>
         </div>
     </nav>
 
@@ -49,8 +49,6 @@
 
             {{-- CARD FILME --}}
             @foreach ($filmes as $filme)
-            
-
                 <div class="bg-slate-900 border border-slate-700 rounded-xl flex gap-6 p-4 hover:border-violet-500 transition cursor-pointer">
                     {{-- IMAGEM PLACEHOLDER --}}
                     <div class="w-28 h-40 bg-slate-700 rounded-lg flex-shrink-0 flex items-center justify-center text-slate-500 text-xs">
@@ -59,6 +57,17 @@
                     {{-- INFOS --}}
                     <div class="flex flex-col justify-center gap-2">
                         <h2 class="text-white font-bold text-lg">{{ $filme->titulo }}</h2>
+                        
+                        <form action="{{ route('filmes.destroy', $filme->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+
+                            <button 
+                                type="submit"
+                                class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs transition">
+                                Excluir
+                            </button>
+                        </form>
                         <div class="flex gap-3 text-xs">
                             <div class="flex gap-2 flex-wrap">
                                 @foreach ($filme->generos as $genero)
@@ -69,6 +78,7 @@
                         </div>
                         <p class="text-slate-400 text-sm max-w-xl">{{ $filme->sinopse }}</p>
                     </div>
+
                 </div>
             @endforeach
 
