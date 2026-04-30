@@ -27,16 +27,23 @@
         <aside class="w-52 min-h-screen bg-slate-900 border-r border-slate-700 p-6 fixed top-16 left-0">
             <h2 class="text-slate-400 text-xs uppercase tracking-widest mb-4">Gêneros</h2>
             <ul class="flex flex-col gap-2">
-                @foreach($generos as $genero)
-                    <li>
-                        <button
-                            @click="generoAtivo = '{{ $genero }}'"
-                            :class="generoAtivo === '{{ $genero }}' ? 'bg-violet-700 text-white' : 'text-slate-400 hover:text-white'"
-                            class="w-full text-left px-3 py-2 rounded-lg text-sm transition">
-                            {{ $genero }}
-                        </button>
-                    </li>
-                @endforeach
+            {{-- Todos --}}
+            {{-- Todos --}}
+            <li>
+                @php $classTodos = $generoAtivo === 'Todos' ? 'bg-violet-700 text-white' : 'text-slate-400 hover:text-white'; @endphp
+                <a href="/filmes" class="block w-full text-left px-3 py-2 rounded-lg text-sm transition {{ $classTodos }}">
+                    Todos
+                </a>
+            </li>
+
+            @foreach($generos as $genero)
+                @php $classGenero = $generoAtivo === $genero->genero ? 'bg-violet-700 text-white' : 'text-slate-400 hover:text-white'; @endphp
+                <li>
+                    <a href="/filmes?genero={{ urlencode($genero->genero) }}" class="block w-full text-left px-3 py-2 rounded-lg text-sm transition {{ $classGenero }}">
+                        {{ $genero->genero }}
+                    </a>
+                </li>
+            @endforeach
             </ul>
         </aside>
 
