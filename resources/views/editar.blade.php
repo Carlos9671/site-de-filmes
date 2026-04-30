@@ -28,13 +28,14 @@
             </div>
         @endif
 
-        <form action="/filmes" method="POST" class="flex flex-col gap-6">
+        <form action="{{ route('filmes.update', $filme->id) }}" method="POST">
             @csrf
+            @method('PUT')
 
             {{-- TÍTULO --}}
             <div>
                 <label class="text-slate-400 text-sm mb-1 block">Título</label>
-                <input type="text" name="titulo" value="{{ old('titulo') }}" placeholder="Nome do filme"
+                <input type="text" name="titulo" value="{{ old('titulo', $filme->titulo) }}" placeholder="Nome do filme"
                     class="w-full bg-slate-800 text-white border border-slate-600 rounded-lg px-4 py-2 focus:outline-none focus:border-violet-500">
             </div>
 
@@ -42,20 +43,21 @@
             <div>
                 <label class="text-slate-400 text-sm mb-1 block">Sinopse</label>
                 <textarea name="sinopse" rows="4" placeholder="Descrição do filme..."
-                    class="w-full bg-slate-800 text-white border border-slate-600 rounded-lg px-4 py-2 focus:outline-none focus:border-violet-500">{{  old('sinopse') }}</textarea>
+                    class="w-full bg-slate-800 text-white border border-slate-600 rounded-lg px-4 py-2 focus:outline-none focus:border-violet-500">{{  old('sinopse'
+                    , $filme->sinopse) }}</textarea>
             </div>
 
             {{-- DURAÇÃO --}}
             <div>
                 <label class="text-slate-400 text-sm mb-1 block">Duração</label>
-                <input type="text" name="duracao" value="{{ old('duracao') }}" placeholder="Ex: 2h 30min"
+                <input type="text" name="duracao" value="{{ old('duracao', $filme->duracao) }}" placeholder="Ex: 2h 30min"
                     class="w-full bg-slate-800 text-white border border-slate-600 rounded-lg px-4 py-2 focus:outline-none focus:border-violet-500">
             </div>
 
             {{-- POSTER --}}
             <div>
                 <label class="text-slate-400 text-sm mb-1 block">URL do Poster</label>
-                <input type="text" name="poster" value="{{ old('poster') }}" placeholder="https://..."
+                <input type="text" name="poster" value="{{ old('poster', $filme->poster) }}" placeholder="https://..."
                     class="w-full bg-slate-800 text-white border border-slate-600 rounded-lg px-4 py-2 focus:outline-none focus:border-violet-500">
             </div>
 
@@ -64,15 +66,13 @@
                 <label class="text-slate-400 text-sm mb-2 block">Gêneros</label>
                 <div class="flex flex-wrap gap-2">
                     @foreach($generos as $genero)
-                        <label class="cursor-pointer">
-                            <input type="checkbox" name="generos[]" value="{{ $genero->id }}"
-                                class="hidden peer"
-                                {{ in_array($genero->id, old('generos', [])) ? 'checked' : '' }}>
+                        <label>
+                            <input type="checkbox"
+                                name="generos[]"
+                                value="{{ $genero->id }}"
+                                {{ $filme->generos->contains($genero->id) ? 'checked' : '' }}>
 
-                            <span class="px-3 py-1 rounded-full text-sm border border-slate-600 text-slate-400
-                                peer-checked:bg-violet-700 peer-checked:text-white peer-checked:border-violet-700 transition">
-                                {{ $genero->genero }}
-                            </span>
+                            {{ $genero->genero }}
                         </label>
                     @endforeach
                 </div>

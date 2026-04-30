@@ -12,16 +12,16 @@ class FilmeController extends Controller
     /**
      * Lista todos os filmes e ggeneros no front
      */
-    public function index(Request $request) 
+    public function index(Request $request)     //recebe dados do http
     {
-        $generos = Genero::all();
-        $generoAtivo = $request->query('genero', 'Todos');
+        $generos = Genero::all();   // busca todos os generos
+        $generoAtivo = $request->query('genero', 'Todos');   //Avalia o genero na URL
 
         if ($generoAtivo === 'Todos') {
-            $filmes = Filme::with('generos')->get();
+            $filmes = Filme::with('generos')->get();    //Busca todos os generos
         } else {
-            $filmes = Filme::with('generos')
-                ->whereHas('generos', function ($query) use ($generoAtivo) {
+            $filmes = Filme::with('generos')    //Busca somente o gênero selecionado
+                ->whereHas('generos', function ($query) use ($generoAtivo) {   
                     $query->where('genero', $generoAtivo);
                 })->get();
         }
@@ -34,7 +34,8 @@ class FilmeController extends Controller
      */
     public function create()
     {
-        //
+        $generos = Genero::all();
+        return view('adicionar', compact('generos'));
     }
 
     /**
@@ -42,7 +43,25 @@ class FilmeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+       $request->validate([     // diminui os riscos de informações erradas em campos errados
+            'titulo' => 'required|string|max:255',
+            'sinopse' => 'required',
+            'duracao' => 'required',
+            'poster' => 'nullable|url',
+            'generos' => 'required|array|min:1'
+        ]);
+
+        $filme = Filme::create([    // cria o filme
+            'titulo' => $request->titulo,
+            'sinopse' => $request->sinopse,
+            'duracao' => $request->duracao,
+            'poster' => $request->poster,
+        ]);
+
+        $filme->generos()->sync($request->generos);
+
+        return redirect('/filmes')->with('success', 'Filme criado com sucesso!');
     }
 
     /**
@@ -58,7 +77,10 @@ class FilmeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $filme = Filme::with('generos')->findOrFail($id);
+        $generos = Genero::all();
+
+        return view('editar', compact('filme','generos'));
     }
 
     /**

@@ -7,6 +7,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
+
+
 <body class="bg-slate-950 text-white min-h-screen" x-data="{ generoAtivo: 'Todos' }">
 
     {{-- NAVBAR --}}
@@ -28,7 +30,6 @@
             <h2 class="text-slate-400 text-xs uppercase tracking-widest mb-4">Gêneros</h2>
             <ul class="flex flex-col gap-2">
             {{-- Todos --}}
-            {{-- Todos --}}
             <li>
                 @php $classTodos = $generoAtivo === 'Todos' ? 'bg-violet-700 text-white' : 'text-slate-400 hover:text-white'; @endphp
                 <a href="/filmes" class="block w-full text-left px-3 py-2 rounded-lg text-sm transition {{ $classTodos }}">
@@ -49,7 +50,19 @@
 
         {{-- LISTA DE FILMES --}}
         <main class="ml-52 flex-1 p-8 flex flex-col gap-4">
+        {{-- MENSAGEM DE SUCESSO --}}
+        @if(session('success'))
+            <div 
+                x-data="{ show: true }"
+                x-show="show"
+                x-transition
+                x-init="setTimeout(() => show = false, 3000)"
+                class="bg-green-600 text-white px-4 py-2 rounded mb-4">
 
+                {{ session('success') }}
+
+            </div>
+        @endif
             <h1 class="text-lg font-semibold text-slate-300 mb-2">
                 Exibindo: <span class="text-violet-400" x-text="generoAtivo"></span>
             </h1>

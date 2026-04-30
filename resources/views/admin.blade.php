@@ -15,8 +15,8 @@
         <div class="flex items-center gap-6 text-sm text-slate-300">
             <a href="filmes" class="hover:text-violet-400 transition">Início</a>
             <a href="#" class="hover:text-violet-400 transition">Buscar</a>
-            <a href="#" class="hover:text-violet-400 transition">Favoritos</a>
-            <a href="admin" class="hover:text-violet-400 transition">Administrador</a>
+            <a href="{{ route('filmes.create') }}" class="hover:text-violet-400 transition">Adicionar</a>
+            <a href="/admin" class="hover:text-violet-400 transition">Administrador</a>
         </div>
     </nav>
 
@@ -44,7 +44,7 @@
         <main class="ml-52 flex-1 p-8 flex flex-col gap-4">
 
 
-            @if(session('success')) // cria uma mensagem de sucesso e faz ela sumir depois de 2 segundos
+            @if(session('success')) 
                 <div 
                     x-data="{ show: true }"
                     x-show="show"
@@ -71,17 +71,17 @@
                     {{-- INFOS --}}
                     <div class="flex flex-col justify-center gap-2">
                         <h2 class="text-white font-bold text-lg">{{ $filme->titulo }}</h2>
-                        
-                        <form action="{{ route('filmes.destroy', $filme->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
+                    {{-- EXCLUIR --}}
+                    <button onclick="deletar({{ $filme->id }})"
+                        class="bg-red-600 px-3 py-1 rounded text-xs mt-2 w-fit">
+                        🗑 Excluir
+                    </button>
 
-                            <button 
-                                type="submit"
-                                class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs transition">
-                                Excluir
-                            </button>
-                        </form>
+                    <a href="{{ route('filmes.edit', $filme->id) }}"
+                       class="bg-blue-500 px-3 py-1 rounded text-xs w-fit  inline-block">
+                    ✏️ Editar
+                    </a>
+                        
                         <div class="flex gap-3 text-xs">
                             <div class="flex gap-2 flex-wrap">
                                 @foreach ($filme->generos as $genero)
@@ -98,6 +98,17 @@
 
         </main>
     </div>
+<script>
+function deletar(id) {
+    if (!confirm('Tem certeza que deseja excluir?')) return;
 
+    fetch('/filmes/' + id, {
+        method: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+    }).then(() => location.reload());
+}
+</script>
 </body>
 </html>

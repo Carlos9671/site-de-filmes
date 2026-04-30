@@ -2,26 +2,22 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FilmeController;
-use PHPUnit\Framework\MockObject\Stub\ReturnReference;
 use App\Models\Filme;
 use App\Models\Genero;
 
+// inicia na tela de cadastro
 Route::get('/', function () {
-    return view('cadastro');       //chama e retorna a tela cadastro
+    return view('cadastro');
 });
 
-Route::get('/filmes', function () {
-    return view('filmes');      //chama e retorna a tela filmes
-});
-
+// pega a tela admin com filmes e generos
 Route::get('/admin', function () {
-
     $filmes = Filme::with('generos')->get();
     $generos = Genero::pluck('genero');
 
     return view('admin', compact('filmes', 'generos'));
 });
 
-route::resource('filmes', FilmeController::class);
 
-Route::delete('/filmes/{id}', [FilmeController::class, 'destroy'])->name('filmes.destroy');
+//  forma extremamente simples de fazer um CRUD, automatiza todas as fases para mim
+Route::resource('filmes', FilmeController::class);
