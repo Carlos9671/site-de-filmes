@@ -14,7 +14,7 @@
         <span class="text-violet-400 font-bold text-xl tracking-widest uppercase">🎬 MyCine</span>
         <div class="flex items-center gap-6 text-sm text-slate-300">
             <a href="filmes" class="hover:text-violet-400 transition">Início</a>
-            <a href="#" class="hover:text-violet-400 transition">Buscar</a>
+            <a href="/generos" class="hover:text-violet-400 transition">Gêneros</a>
             <a href="{{ route('filmes.create') }}" class="hover:text-violet-400 transition">Adicionar</a>
             <a href="/admin" class="hover:text-violet-400 transition">Administrador</a>
         </div>
@@ -65,9 +65,9 @@
             @foreach ($filmes as $filme)
                 <div class="bg-slate-900 border border-slate-700 rounded-xl flex gap-6 p-4 hover:border-violet-500 transition cursor-pointer">
                     {{-- IMAGEM PLACEHOLDER --}}
-                    <div class="w-28 h-40 bg-slate-700 rounded-lg flex-shrink-0 flex items-center justify-center text-slate-500 text-xs">
-                        Poster
-                    </div>
+                    <img src="{{ $filme->poster }}" 
+                        class="w-28 h-40 object-cover rounded-lg"
+                        alt="Poster do filme">
                     {{-- INFOS --}}
                     <div class="flex flex-col justify-center gap-2">
                         <h2 class="text-white font-bold text-lg">{{ $filme->titulo }}</h2>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GeneroController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FilmeController;
 use App\Models\Filme;
@@ -21,3 +22,6 @@ Route::get('/admin', function () {
 
 //  forma extremamente simples de fazer um CRUD, automatiza todas as fases para mim
 Route::resource('filmes', FilmeController::class);
+
+// igual o de cima soq para o genero
+Route::resource('generos', GeneroController::class);
