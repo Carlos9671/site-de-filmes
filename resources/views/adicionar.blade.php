@@ -52,6 +52,14 @@
                     class="w-full bg-slate-800 text-white border border-slate-600 rounded-lg px-4 py-2 focus:outline-none focus:border-violet-500">
             </div>
 
+            {{-- ANO DE LANÇAMENTO --}}
+            <div>
+                <label class="text-slate-400 text-sm mb-1 block">Ano de lançamento</label>
+                <input type="number" name="ano_lancamento" value="{{ old('ano_lancamento') }}" placeholder="Ex: 2014"
+                    min="1888" max="{{ date('Y') }}"
+                    class="w-full bg-slate-800 text-white border border-slate-600 rounded-lg px-4 py-2 focus:outline-none focus:border-violet-500">
+            </div>
+
             {{-- POSTER --}}
             <div>
                 <label class="text-slate-400 text-sm mb-1 block">URL do Poster</label>

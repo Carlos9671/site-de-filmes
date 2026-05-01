@@ -9,7 +9,7 @@
 </head>
 
 
-<body class="bg-slate-950 text-white min-h-screen" x-data="{ buscarAberto: false, generoAtivo: 'Todos' }">
+<body class="bg-slate-950 text-white min-h-screen" x-data="{ buscarAberto: false }">
 
     {{-- NAVBAR + BUSCA --}}
     <div class="fixed top-0 left-0 right-0 z-10">
@@ -19,7 +19,7 @@
             <div class="flex items-center gap-6 text-sm text-slate-300">
                 <a href="#" class="hover:text-violet-400 transition">Início</a>
                 <button @click="buscarAberto = !buscarAberto" class="hover:text-violet-400 transition">Buscar</button>
-                <a href="/admin" class="hover:text-violet-400 transition">Administrador</a>
+                <a href="cadastro" class="hover:text-violet-400 transition">Administrador</a>
             </div>
         </nav>
 
@@ -78,7 +78,7 @@
             </div>
         @endif
             <h1 class="text-lg font-semibold text-slate-300 mb-2">
-                Exibindo: <span class="text-violet-400" x-text="generoAtivo"></span>
+                Exibindo: <span class="text-violet-400">{{ $generoAtivo }}</span>
             </h1>
 
             {{-- CARD FILME --}} 
@@ -101,6 +101,7 @@
                                 @endforeach
                             </div>
                             <span class="text-slate-400">⏱ {{ $filme->duracao }}</span>
+                            <span class="text-slate-400">{{ $filme->ano_lancamento }}</span>
                         </div>
                         <p class="text-slate-400 text-sm max-w-xl">{{ Str::limit($filme->sinopse, 120) }}</p>
                     </div>

@@ -10,6 +10,7 @@ class Filme extends Model
         'titulo',
         'sinopse',
         'duracao',
+        'ano_lancamento',
         'poster',
     ];
 

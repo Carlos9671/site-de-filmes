@@ -59,6 +59,7 @@ class FilmeController extends Controller
             'titulo' => 'required|string|max:255',
             'sinopse' => 'required',
             'duracao' => 'required',
+            'ano_lancamento' => 'required|integer|min:1888|max:' . date('Y'),
             'poster' => 'nullable|url',
             'generos' => 'required|array|min:1'
         ]);
@@ -67,6 +68,7 @@ class FilmeController extends Controller
             'titulo' => $request->titulo,
             'sinopse' => $request->sinopse,
             'duracao' => $request->duracao,
+            'ano_lancamento' => $request->ano_lancamento,
             'poster' => $request->poster,
         ]);
 
@@ -103,6 +105,7 @@ class FilmeController extends Controller
             'titulo' => 'required|string|max:255',
             'sinopse' => 'required',
             'duracao' => 'required',
+            'ano_lancamento' => 'required|integer|min:1888|max:' . date('Y'),
             'poster' => 'nullable|url',
             'generos' => 'required|array|min:1'
         ]);
@@ -112,6 +115,7 @@ class FilmeController extends Controller
             'titulo' => $request->titulo,
             'sinopse' => $request->sinopse,
             'duracao' => $request->duracao,
+            'ano_lancamento' => $request->ano_lancamento,
             'poster' => $request->poster,
         ]);
 

@@ -16,55 +16,33 @@
         </h1>
 
         {{-- LOGIN --}}
-        <div x-show="tela === 'login'" class="bg-slate-900 border border-slate-700 rounded-xl p-8 flex flex-col gap-4">
-            <div>
-                <label class="text-slate-400 text-sm mb-1 block">Email</label>
-                <input type="email" placeholder="seu@email.com"
-                    class="w-full bg-slate-800 text-white border border-slate-600 rounded-lg px-4 py-2 focus:outline-none focus:border-violet-500">
-            </div>
-            <div>
-                <label class="text-slate-400 text-sm mb-1 block">Senha</label>
-                <input type="password" placeholder="••••••••"
-                    class="w-full bg-slate-800 text-white border border-slate-600 rounded-lg px-4 py-2 focus:outline-none focus:border-violet-500">
-            </div>
-            <a href="#" class="text-violet-400 text-sm text-right hover:underline">Esqueceu a senha?</a>
-            <a href="/filmes" class="w-full bg-violet-700 hover:bg-violet-600 text-white font-semibold py-2 rounded-lg transition text-center">
-                Entrar
-            </a>
-            <button @click="tela = 'cadastro'" type="button" class="w-full text-violet-400 text-sm hover:underline">
-                Não tenho conta
-            </button>
-        </div>
+        <form action="/login" method="POST" class="bg-slate-900 border border-slate-700 rounded-xl p-8 flex flex-col gap-4">
+            @csrf
 
-        {{-- CADASTRO --}}
-        <div x-show="tela === 'cadastro'" class="bg-slate-900 border border-slate-700 rounded-xl p-8 flex flex-col gap-4">
+            {{-- ERRO --}}
+            @if(session('erro'))
+                <div class="bg-red-600 text-white p-2 rounded text-sm">
+                    {{ session('erro') }}
+                </div>
+            @endif
+
             <div>
-                <label class="text-slate-400 text-sm mb-1 block">Nome completo</label>
-                <input type="text" placeholder="Seu nome"
-                    class="w-full bg-slate-800 text-white border border-slate-600 rounded-lg px-4 py-2 focus:outline-none focus:border-violet-500">
+                <label class="text-slate-400 text-sm mb-1 block">Usuário</label>
+                <input type="text" name="usuario" placeholder="usuário"
+                    class="w-full bg-slate-800 text-white border border-slate-600 rounded-lg px-4 py-2">
             </div>
-            <div>
-                <label class="text-slate-400 text-sm mb-1 block">Email</label>
-                <input type="email" placeholder="seu@email.com"
-                    class="w-full bg-slate-800 text-white border border-slate-600 rounded-lg px-4 py-2 focus:outline-none focus:border-violet-500">
-            </div>
+
             <div>
                 <label class="text-slate-400 text-sm mb-1 block">Senha</label>
-                <input type="password" placeholder="••••••••"
-                    class="w-full bg-slate-800 text-white border border-slate-600 rounded-lg px-4 py-2 focus:outline-none focus:border-violet-500">
+                <input type="password" name="senha" placeholder="••••••••"
+                    class="w-full bg-slate-800 text-white border border-slate-600 rounded-lg px-4 py-2">
             </div>
-            <div>
-                <label class="text-slate-400 text-sm mb-1 block">Confirmar senha</label>
-                <input type="password" placeholder="••••••••"
-                    class="w-full bg-slate-800 text-white border border-slate-600 rounded-lg px-4 py-2 focus:outline-none focus:border-violet-500">
-            </div>
-            <button class="w-full bg-violet-700 hover:bg-violet-600 text-white font-semibold py-2 rounded-lg transition">
-                Registrar
+
+            <button type="submit"
+                class="w-full bg-violet-700 hover:bg-violet-600 text-white font-semibold py-2 rounded-lg transition">
+                Entrar
             </button>
-            <button @click="tela = 'login'" type="button" class="w-full text-violet-400 text-sm hover:underline">
-                Já tenho conta
-            </button>
-        </div>
+        </form>
 
     </div>
 
