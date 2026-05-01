@@ -9,7 +9,7 @@
 <body class="bg-slate-950 text-white min-h-screen">
 
     <nav class="bg-slate-900 border-b border-slate-700 px-8 py-4 flex items-center justify-between">
-        <span class="text-violet-400 font-bold text-xl tracking-widest uppercase">🎬 CineVault</span>
+        <span class="text-violet-400 font-bold text-xl tracking-widest uppercase">🎬 MyCine</span>
         <a href="/filmes" class="text-slate-400 hover:text-violet-400 text-sm transition">← Voltar</a>
     </nav>
 
@@ -37,15 +37,23 @@
             @foreach($generos as $genero)
                 <div class="bg-slate-900 border border-slate-700 rounded-xl px-6 py-4 flex items-center justify-between">
                     <span class="text-white">{{ $genero->genero }}</span>
-                    <form action="/generos/{{ $genero->id }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="text-red-400 hover:text-red-300 text-sm transition"
-                            onclick="return confirm('Tem certeza que deseja deletar este gênero?')">
-                            Deletar
-                        </button>
-                    </form>
+                    <form action="/generos/{{ $genero->id }}" method="POST"></form>
+                    
+                    <div class="flex gap-4 items-center">
+                        <a href="/generos/{{ $genero->id }}/edit" class="text-violet-400 hover:text-violet-300 text-sm transition">
+                            Editar
+                        </a>
+                        <form action="/generos/{{ $genero->id }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-400 hover:text-red-300 text-sm transition"
+                                onclick="return confirm('Tem certeza que deseja deletar este gênero?')">
+                                Deletar
+                            </button>
+                        </form>
+                    </div>
                 </div>
+
             @endforeach
         </div>
     </div>

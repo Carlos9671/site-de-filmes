@@ -38,6 +38,25 @@ class GeneroController extends Controller
         return redirect('/generos')->with('success','Gênero criado com sucesso');
     }
 
+    public function edit(string $id)
+    {
+        $genero = Genero::findOrFail($id);
+        return view('generos.edit', compact('genero'));
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $genero = Genero::findOrFail($id);
+
+        $request->validate([
+            'genero' => 'required|unique:generos,genero,' . $id,
+        ]);
+
+        $genero->update(['genero' => $request->genero]);
+
+        return redirect('/generos')->with('success', 'Gênero atualizado com sucesso!');
+    }
+
     /**
      * apagar algum genero
      */
