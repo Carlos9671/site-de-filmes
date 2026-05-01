@@ -14,8 +14,8 @@
         <span class="text-violet-400 font-bold text-xl tracking-widest uppercase">🎬 MyCine</span>
         <div class="flex items-center gap-6 text-sm text-slate-300">
             <a href="filmes" class="hover:text-violet-400 transition">Início</a>
-            <a href="/generos" class="hover:text-violet-400 transition">Gêneros</a>
-            <a href="{{ route('filmes.create') }}" class="hover:text-violet-400 transition">Adicionar</a>
+            <a href="/generos" class="hover:text-violet-400 transition">Add Gêneros</a>
+            <a href="{{ route('filmes.create') }}" class="hover:text-violet-400 transition">Add Filmes</a>
             <a href="/admin" class="hover:text-violet-400 transition">Administrador</a>
         </div>
     </nav>

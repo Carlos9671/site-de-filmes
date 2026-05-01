@@ -17,7 +17,6 @@
         <div class="flex items-center gap-6 text-sm text-slate-300">
             <a href="#" class="hover:text-violet-400 transition">Início</a>
             <a href="#" class="hover:text-violet-400 transition">Buscar</a>
-            <a href="#" class="hover:text-violet-400 transition">Favoritos</a>
             <a href="/admin" class="hover:text-violet-400 transition">Adiministrador</a>
         </div>
     </nav>
