@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * cria as colunas do filme
      */
     public function up(): void
     {
@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('titulo');
             $table->text('sinopse');
             $table->string('duracao');
-            $table->string('poster')->nullable();
+            $table->text('poster')->nullable();
             $table->timestamps();
         });
     }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CineVault - Filmes</title>
+    <title>MyCine - Filmes</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
@@ -67,15 +67,16 @@
                 Exibindo: <span class="text-violet-400" x-text="generoAtivo"></span>
             </h1>
 
-            {{-- CARD FILME --}}
+            {{-- CARD FILME --}} 
+
             @foreach ($filmes as $filme)
             
 
                 <div class="bg-slate-900 border border-slate-700 rounded-xl flex gap-6 p-4 hover:border-violet-500 transition cursor-pointer">
                     {{-- IMAGEM PLACEHOLDER --}}
-                    <div class="w-28 h-40 bg-slate-700 rounded-lg flex-shrink-0 flex items-center justify-center text-slate-500 text-xs">
-                        Poster
-                    </div>
+                    <img src="{{ $filme->poster }}" 
+                        class="w-28 h-40 object-cover rounded-lg"
+                        alt="Poster do filme">
                     {{-- INFOS --}}
                     <div class="flex flex-col justify-center gap-2">
                         <h2 class="text-white font-bold text-lg">{{ $filme->titulo }}</h2>

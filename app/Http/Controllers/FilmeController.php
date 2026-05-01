@@ -61,7 +61,7 @@ class FilmeController extends Controller
 
         $filme->generos()->sync($request->generos);
 
-        return redirect('/filmes')->with('success', 'Filme criado com sucesso!');
+        return redirect('/admin')->with('success', 'Filme criado com sucesso!');
     }
 
     /**
@@ -88,7 +88,26 @@ class FilmeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'titulo' => 'required|string|max:255',
+            'sinopse' => 'required',
+            'duracao' => 'required',
+            'poster' => 'nullable|url',
+            'generos' => 'required|array|min:1'
+        ]);
+        $filme = Filme::findOrFail($id);
+
+        $filme->update([    // atualiza os dados do filme
+            'titulo' => $request->titulo,
+            'sinopse' => $request->sinopse,
+            'duracao' => $request->duracao,
+            'poster' => $request->poster,
+        ]);
+
+        $filme->generos()->sync($request->generos); // Atualiza os generos
+
+
+        return redirect('/admin')->with('success','Seu filme foi editado com sucesso');
     }
 
     /**

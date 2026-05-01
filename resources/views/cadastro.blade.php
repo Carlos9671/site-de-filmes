@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CineVault</title>
+    <title>MyCine</title>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -12,7 +12,7 @@
     <div class="w-full max-w-md px-6" x-data="{ tela: 'login' }">
 
         <h1 class="text-center text-3xl font-bold text-violet-400 mb-8 tracking-widest uppercase">
-            🎬 CineVault
+            🎬 MyCine
         </h1>
 
         {{-- LOGIN --}}

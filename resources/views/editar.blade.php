@@ -11,7 +11,7 @@
 
     {{-- NAVBAR --}}
     <nav class="bg-slate-900 border-b border-slate-700 px-8 py-4 flex items-center justify-between">
-        <span class="text-violet-400 font-bold text-xl tracking-widest uppercase">🎬 CineVault</span>
+        <span class="text-violet-400 font-bold text-xl tracking-widest uppercase">🎬 MyCine</span>
         <a href="/filmes" class="text-slate-400 hover:text-violet-400 text-sm transition">← Voltar</a>
     </nav>
 
@@ -67,12 +67,14 @@
                 <div class="flex flex-wrap gap-2">
                     @foreach($generos as $genero)
                         <label>
-                            <input type="checkbox"
-                                name="generos[]"
-                                value="{{ $genero->id }}"
+                            <input type="checkbox" name="generos[]" value="{{ $genero->id }}"
+                                class="hidden peer"
                                 {{ $filme->generos->contains($genero->id) ? 'checked' : '' }}>
 
-                            {{ $genero->genero }}
+                            <span class="px-3 py-1 rounded-full text-sm border border-slate-600 text-slate-400
+                                peer-checked:bg-violet-700 peer-checked:text-white peer-checked:border-violet-700 transition">
+                                {{ $genero->genero }}
+                            </span>
                         </label>
                     @endforeach
                 </div>
