@@ -17,7 +17,7 @@ class GeneroController extends Controller
     }
 
     /**
-     * 
+     *  exibir o formulário de criar genero
      */
     public function create()
     {
@@ -25,7 +25,7 @@ class GeneroController extends Controller
     }
 
     /**
-     * Criar o genero
+     * Criar o genero de fato
      */
     public function store(Request $request)
     {
@@ -39,35 +39,16 @@ class GeneroController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * 
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * 
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
      * apagar algum genero
      */
     public function destroy(string $id)
     {
         $genero = Genero::findOrFail($id);
+
+        if ($genero->filmes()->count() > 0) {   //se generos for maior que 0 não é possível apagar o gênero
+            return redirect('/generos')->with('erro', 'Este gênero possui ' . $genero->filmes()->count() . ' filme(s) vinculado(s) e não pode ser deletado.');
+        }
+
         $genero->delete();
         return redirect('/generos')->with('success','Gênero deletado com sucesso');
     }

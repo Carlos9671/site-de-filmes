@@ -16,17 +16,28 @@ class FilmeController extends Controller
     {
         $generos = Genero::all();   // busca todos os generos
         $generoAtivo = $request->query('genero', 'Todos');   //Avalia o genero na URL
+        $busca = $request->query('busca');  //pega o valor de busca na URL
 
-        if ($generoAtivo === 'Todos') {
-            $filmes = Filme::with('generos')->get();    //Busca todos os generos
-        } else {
-            $filmes = Filme::with('generos')    //Busca somente o gênero selecionado
-                ->whereHas('generos', function ($query) use ($generoAtivo) {   
-                    $query->where('genero', $generoAtivo);
-                })->get();
+        $query = Filme::with('generos');
+        
+        
+        // faz a busca por generos
+        if ($generoAtivo !== 'Todos') {
+            $query->whereHas('generos', function ($q) use ($generoAtivo) {
+                $q->where('genero', $generoAtivo);
+            });
         }
 
-        return view('filmes', compact('filmes', 'generos', 'generoAtivo'));
+        // Forma de aumentar a qualidade da busca
+        if ($busca) {
+            $query->where('titulo','like','%' . $busca . '%');
+        }
+
+        // executa de fato a busca com todos os filtros
+        $filmes = $query->get();
+
+
+        return view('filmes', compact('filmes', 'generos', 'generoAtivo', 'busca'));
     }
 
     /**

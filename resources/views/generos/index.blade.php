@@ -27,6 +27,12 @@
             </div>
         @endif
 
+        @if (session('erro'))
+            <div class="bg-red-900 text-red-200 px-4 py-3 rounded-1g mb-6">
+                {{ session('erro') }}
+            </div>
+        @endif
+
         <div class="flex flex-col gap-3">
             @foreach($generos as $genero)
                 <div class="bg-slate-900 border border-slate-700 rounded-xl px-6 py-4 flex items-center justify-between">

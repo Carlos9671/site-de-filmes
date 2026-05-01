@@ -9,17 +9,32 @@
 </head>
 
 
-<body class="bg-slate-950 text-white min-h-screen" x-data="{ generoAtivo: 'Todos' }">
+<body class="bg-slate-950 text-white min-h-screen" x-data="{ buscarAberto: false, generoAtivo: 'Todos' }">
 
-    {{-- NAVBAR --}}
-    <nav class="bg-slate-900 border-b border-slate-700 px-8 py-4 flex items-center justify-between fixed top-0 left-0 right-0 z-10">
-        <span class="text-violet-400 font-bold text-xl tracking-widest uppercase">🎬 MyCine</span>
-        <div class="flex items-center gap-6 text-sm text-slate-300">
-            <a href="#" class="hover:text-violet-400 transition">Início</a>
-            <a href="#" class="hover:text-violet-400 transition">Buscar</a>
-            <a href="/admin" class="hover:text-violet-400 transition">Adiministrador</a>
+    {{-- NAVBAR + BUSCA --}}
+    <div class="fixed top-0 left-0 right-0 z-10">
+
+        <nav class="bg-slate-900 border-b border-slate-700 px-8 py-4 flex items-center justify-between">
+            <span class="text-violet-400 font-bold text-xl tracking-widest uppercase">🎬 MyCine</span>
+            <div class="flex items-center gap-6 text-sm text-slate-300">
+                <a href="#" class="hover:text-violet-400 transition">Início</a>
+                <button @click="buscarAberto = !buscarAberto" class="hover:text-violet-400 transition">Buscar</button>
+                <a href="/admin" class="hover:text-violet-400 transition">Administrador</a>
+            </div>
+        </nav>
+
+        {{-- BARRA DE BUSCA --}}
+        <div x-show="buscarAberto" class="bg-slate-900 border-b border-slate-700 px-8 py-3">
+            <form action="/filmes" method="GET" class="flex gap-3">
+                <input type="text" name="busca" placeholder="Buscar filme..."
+                    class="flex-1 bg-slate-800 text-white border border-slate-600 rounded-lg px-4 py-2 focus:outline-none focus:border-violet-500">
+                <button type="submit" class="bg-violet-700 hover:bg-violet-600 text-white px-6 py-2 rounded-lg transition">
+                    Buscar
+                </button>
+            </form>
         </div>
-    </nav>
+
+    </div>
 
     {{-- CONTEÚDO --}}
     <div class="flex pt-16">
@@ -87,7 +102,7 @@
                             </div>
                             <span class="text-slate-400">⏱ {{ $filme->duracao }}</span>
                         </div>
-                        <p class="text-slate-400 text-sm max-w-xl">{{ $filme->sinopse }}</p>
+                        <p class="text-slate-400 text-sm max-w-xl">{{ Str::limit($filme->sinopse, 120) }}</p>
                     </div>
                 </div>
             @endforeach
