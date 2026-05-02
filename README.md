@@ -1,30 +1,43 @@
-# 🎬 MyCine
+# 🎬 MyCine — Carlos Renzellmann de Almeida
 
-Aplicação web para catálogo e gerenciamento de filmes, desenvolvida como parte de um processo seletivo para vaga de desenvolvedor web júnior.
+Aplicação web para catálogo e gerenciamento de filmes, desenvolvida como teste prático para vaga de desenvolvedor web júnior.
 
 ---
 
-## 🚀 Tecnologias utilizadas
+## 🛠️ Tecnologias e versões
 
-- **Laravel 13** — framework PHP para o back-end
+- **PHP** 8.5.5
+- **Laravel** 13.6.0
+- **MySQL** 8.0
 - **Blade** — sistema de templates do Laravel
 - **Tailwind CSS** — estilização via classes utilitárias
 - **Alpine.js** — interatividade no front-end
-- **MySQL** — banco de dados relacional
 - **Vite** — compilação de assets
 
 ---
 
 ## ✨ Funcionalidades
 
-- Listagem de filmes com nome, poster, gêneros, duração e sinopse
+- Listagem de filmes com poster, gêneros, duração e sinopse
 - Filtro de filmes por gênero
 - Busca de filmes por título
+- Tela de detalhes do filme
 - CRUD completo de filmes (criar, editar, excluir)
 - CRUD completo de gêneros com validação de duplicatas
 - Proteção contra exclusão de gênero vinculado a filmes
 - Relacionamento muitos-para-muitos entre filmes e gêneros
-- Interface responsiva para desktop e mobile
+- Painel administrativo separado
+- Interface responsiva para desktop e mobile com menu hamburguer
+
+---
+
+## 🎁 Bônus implementados
+
+- **Responsividade mobile** — navbar com menu hamburguer, sidebar vira dropdown no mobile e cards se adaptam ao tamanho da tela
+- **Filtro por gênero + busca combinados** — é possível filtrar por gênero e buscar por título ao mesmo tempo
+- **Feedback visual** — mensagens de sucesso com desaparecimento automático após 2 segundos
+- **Proteção de gêneros** — gêneros vinculados a filmes não podem ser deletados, exibindo mensagem de erro com a quantidade de filmes vinculados
+- **Relacionamento muitos-para-muitos** — um filme pode ter vários gêneros e um gênero pode pertencer a vários filmes, usando tabela intermediária
 
 ---
 
@@ -70,7 +83,7 @@ DB_USERNAME=root
 DB_PASSWORD=sua_senha
 ```
 
-> Crie o banco `filmes` no MySQL antes de rodar as migrations.
+> Crie o banco `filmes` no MySQL antes de rodar as migrations. Configure as credenciais de acordo com o seu ambiente local.
 
 **5. Rode as migrations e popule o banco**
 ```bash
@@ -103,6 +116,22 @@ http://localhost:8000
 
 ---
 
-## 👨‍💻 Autor
+## 📁 Estrutura principal
 
-Desenvolvido por **Carlos** como teste prático para vaga de desenvolvedor web júnior.
+```
+app/
+├── Http/Controllers/
+│   ├── FilmeController.php   # CRUD de filmes
+│   ├── GeneroController.php  # CRUD de gêneros
+│   └── AdminController.php   # Painel administrativo
+├── Models/
+│   ├── Filme.php
+│   └── Genero.php
+database/
+├── migrations/               # Estrutura das tabelas
+└── seeders/                  # Dados iniciais
+resources/views/
+├── filmes/                   # Telas de filmes
+├── generos/                  # Telas de gêneros
+└── admin/                    # Painel admin
+```
