@@ -1,58 +1,108 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🎬 MyCine
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplicação web para catálogo e gerenciamento de filmes, desenvolvida como parte de um processo seletivo para vaga de desenvolvedor web júnior.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Tecnologias utilizadas
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Laravel 13** — framework PHP para o back-end
+- **Blade** — sistema de templates do Laravel
+- **Tailwind CSS** — estilização via classes utilitárias
+- **Alpine.js** — interatividade no front-end
+- **MySQL** — banco de dados relacional
+- **Vite** — compilação de assets
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## ✨ Funcionalidades
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Listagem de filmes com nome, poster, gêneros, duração e sinopse
+- Filtro de filmes por gênero
+- Busca de filmes por título
+- CRUD completo de filmes (criar, editar, excluir)
+- CRUD completo de gêneros com validação de duplicatas
+- Proteção contra exclusão de gênero vinculado a filmes
+- Relacionamento muitos-para-muitos entre filmes e gêneros
+- Interface responsiva para desktop e mobile
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## ⚙️ Como rodar o projeto localmente
 
-## Agentic Development
+### Pré-requisitos
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Certifique-se de ter instalado:
 
+- [PHP 8.2+](https://www.php.net/)
+- [Composer](https://getcomposer.org/)
+- [Node.js](https://nodejs.org/)
+- [MySQL](https://www.mysql.com/)
+- [Git](https://git-scm.com/)
+
+### Passo a passo
+
+**1. Clone o repositório**
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/Carlos9671/site-de-filmes.git
+cd site-de-filmes
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+**2. Instale as dependências**
+```bash
+composer install
+npm install
+```
 
-## Contributing
+**3. Configure o ambiente**
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**4. Configure o banco de dados no arquivo `.env`**
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=filmes
+DB_USERNAME=root
+DB_PASSWORD=sua_senha
+```
 
-## Code of Conduct
+> Crie o banco `filmes` no MySQL antes de rodar as migrations.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+**5. Rode as migrations e popule o banco**
+```bash
+php artisan migrate --seed
+```
 
-## Security Vulnerabilities
+**6. Suba os servidores**
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Em dois terminais separados:
+```bash
+# Terminal 1
+php artisan serve
 
-## License
+# Terminal 2
+npm run dev
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**7. Acesse no navegador**
+```
+http://localhost:8000
+```
+
+---
+
+## 🗄️ Modelagem do banco
+
+- **filmes** — id, titulo, sinopse, duracao, poster, timestamps
+- **generos** — id, genero (único), timestamps
+- **filme_genero** — tabela intermediária (muitos-para-muitos)
+
+---
+
+## 👨‍💻 Autor
+
+Desenvolvido por **Carlos** como teste prático para vaga de desenvolvedor web júnior.
