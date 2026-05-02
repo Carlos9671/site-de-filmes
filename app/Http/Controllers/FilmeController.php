@@ -82,7 +82,8 @@ class FilmeController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $filme = Filme::with('generos')->findOrFail($id);
+        return view('show', compact('filme'));
     }
 
     /**

@@ -117,6 +117,7 @@
 
             {{-- CARD FILME --}}
             @foreach ($filmes as $filme)
+                <a href="{{ route('filmes.show', $filme->id) }}" class="block">
                 <div class="bg-slate-900 border border-slate-700 rounded-xl flex flex-col md:flex-row gap-4 p-4 hover:border-violet-500 transition cursor-pointer">
                     {{-- POSTER --}}
                     <img src="{{ $filme->poster }}"
@@ -134,6 +135,7 @@
                         <p class="text-slate-400 text-sm">{{ Str::limit($filme->sinopse, 120) }}</p>
                     </div>
                 </div>
+                </a>
             @endforeach
 
         </main>
